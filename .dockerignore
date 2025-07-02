@@ -1,0 +1,60 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+DEPLOYMENT.md
+*.md
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node.js
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Laravel
+.env
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+
+# Storage
+storage/*.key
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+
+# Testing
+tests
+phpunit.xml
+
+# Terraform
+terraform
+*.tfstate
+*.tfstate.backup
+
+# Scripts
+scripts
+aws-config.sh
+
+# Database
+*.sql
+*.mwb
+*.mwb.bak
+
+# Other
+nginx_app.conf
+Procfile 

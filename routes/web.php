@@ -19,7 +19,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[PositionsLivewire::class,'render'])->name('index');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Health check endpoint for load balancer
+Route::get('/health', function () {
+    return response()->json(['status' => 'healthy'], 200);
+});
 
 Route::middleware([
     'auth:sanctum',

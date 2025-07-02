@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sischampions2022-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - sischampions2022
+
+  db:
+    image: mysql:8.0
+    container_name: sischampions2022-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: sischampions2022
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: password
+      MYSQL_USER: sischampions2022
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+      - dbdata:/var/lib/mysql
+    networks:
+      - sischampions2022
+
+  nginx:
+    image: nginx:alpine
+    container_name: sischampions2022-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - sischampions2022
+
+  redis:
+    image: redis:alpine
+    container_name: sischampions2022-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - sischampions2022
+
+volumes:
+  dbdata:
+    driver: local
+
+networks:
+  sischampions2022:
+    driver: bridge 
