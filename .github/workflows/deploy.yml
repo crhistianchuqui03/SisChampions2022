@@ -107,4 +107,10 @@ jobs:
         task-definition: task-definition.json
         service: sischampions2022-service
         cluster: sischampions2022-cluster
-        wait-for-service-stability: true 
+        wait-for-service-stability: true
+
+    - name: Dump autoload
+      run: composer dump-autoload
+
+    - name: Cache config
+      run: php artisan config:cache 
